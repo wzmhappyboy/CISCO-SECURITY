@@ -40,4 +40,6 @@ public interface SysConfigDao  {
 	void updateById(SysConfigEntity sysConfigEntity);
 
 	SysConfigEntity getById(Long id);
+
+	void  deleteById(Long id);
 }

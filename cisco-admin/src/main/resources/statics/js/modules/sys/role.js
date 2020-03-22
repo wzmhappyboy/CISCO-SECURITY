@@ -21,13 +21,13 @@ $(function () {
         jsonReader : {
             root: "page.list",
             page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            total: "totalPage",
+            records: "totalCount"
         },
         prmNames : {
             page:"page",
             rows:"limit",
-            order: "order"
+          //  order: "order"
         },
         gridComplete:function(){
             //隐藏grid底部滚动条

@@ -33,11 +33,11 @@
 	</select>
 
 <select id="selectOne" resultMap="sysUserResultMap" parameterType="String">
-	select * from sys_user where username=#{username};
+	select * from sys_user where username=#{username}
 </select>
 
 	<select id="getById" resultMap="sysUserResultMap" parameterType="Long">
-	select * from sys_user where user_id=#{id};
+	select * from sys_user where user_id=#{id}
 </select>
 
 
@@ -53,7 +53,7 @@
 	</insert>
 
 	<select id="queryPage" resultType="io.cisco.modules.sys.entity.SysUserEntity">
-		select  * from sys_user;
+		select  * from sys_user
 
 	</select>
 

@@ -8,6 +8,7 @@
 
 package io.cisco.modules.sys.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.cisco.modules.sys.dao.SysLogDao;
 import io.cisco.modules.sys.entity.SysLogEntity;
@@ -25,6 +26,9 @@ public class SysLogServiceImpl  implements SysLogService {
 SysLogDao sysLogDao;
     @Override
     public PageInfo<SysLogEntity> queryPage(Map<String, Object> params) {
+        int page = Integer.parseInt(params.get("page").toString());
+        int limit = Integer.parseInt(params.get("limit").toString());
+        PageHelper.startPage(page,limit);
         List<SysLogEntity> list=sysLogDao.queryPage();
         return new PageInfo<>(list);
     }

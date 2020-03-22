@@ -14,7 +14,7 @@
 
 
 	<select id="queryPage" resultType="io.cisco.modules.sys.entity.SysConfigEntity">
-		select * from sys_config;
+		select * from sys_config
 	</select>
 
 	<insert id="save" parameterType="io.cisco.modules.sys.entity.SysConfigEntity">
@@ -29,4 +29,8 @@
 		select  * from sys_config where id=#{id}
 	</select>
 
+
+	<delete id="deleteById" parameterType="long">
+		delete  from sys_config where id=#{id}
+	</delete>
 </mapper>

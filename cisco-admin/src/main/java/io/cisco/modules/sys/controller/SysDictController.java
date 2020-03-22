@@ -8,6 +8,7 @@
 
 package io.cisco.modules.sys.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.cisco.common.utils.R;
 import io.cisco.common.validator.ValidatorUtils;
@@ -37,9 +38,15 @@ public class SysDictController {
     @RequestMapping("/list")
     @RequiresPermissions("sys:dict:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageInfo<SysDictEntity> page = sysDictService.queryPage(params);
+        int page = Integer.parseInt(params.get("page").toString());
+        int limit = Integer.parseInt(params.get("limit").toString());
+        PageHelper.startPage(page,limit);
 
-        return R.ok().put("page", page);
+
+        PageInfo<SysDictEntity> list = sysDictService.queryPage(params);
+        int r = (int)list.getTotal();
+        int sum = (int) Math.floor(r/limit)+1;
+        return R.ok().put("page", list).put("totalCount",r).put("currPage",page).put("totalPage",sum);
     }
 
 

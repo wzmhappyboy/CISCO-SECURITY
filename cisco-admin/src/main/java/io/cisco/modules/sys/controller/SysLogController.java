@@ -8,6 +8,7 @@
 
 package io.cisco.modules.sys.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.cisco.modules.sys.entity.SysLogEntity;
 import io.cisco.modules.sys.service.SysLogService;
@@ -40,9 +41,15 @@ public class SysLogController {
 	@RequestMapping("/list")
 	@RequiresPermissions("sys:log:list")
 	public R list(@RequestParam Map<String, Object> params){
-		PageInfo<SysLogEntity> page = sysLogService.queryPage(params);
+		int page = Integer.parseInt(params.get("page").toString());
+		int limit = Integer.parseInt(params.get("limit").toString());
+		PageHelper.startPage(page,limit);
+		PageInfo<SysLogEntity> list = sysLogService.queryPage(params);
 
-		return R.ok().put("page", page);
+		int r = (int)list.getTotal();
+
+		int sum = (int) Math.floor(r/limit)+1;
+		return R.ok().put("page", list).put("totalCount",r).put("currPage",page).put("totalPage",sum);
 	}
 	
 }

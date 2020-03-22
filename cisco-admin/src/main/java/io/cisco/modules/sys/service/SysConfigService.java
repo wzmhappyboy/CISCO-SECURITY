@@ -11,6 +11,7 @@ package io.cisco.modules.sys.service;
 import com.github.pagehelper.PageInfo;
 import io.cisco.modules.sys.entity.SysConfigEntity;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,5 +60,7 @@ public interface SysConfigService  {
 SysConfigEntity getById(long id);
 
 //	void save(SysConfigEntity sysConfigEntity);
+
+	void removeByIds(List<Long> longs);
 	
 }

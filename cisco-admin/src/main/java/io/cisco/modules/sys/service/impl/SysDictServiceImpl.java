@@ -8,6 +8,7 @@
 
 package io.cisco.modules.sys.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.cisco.modules.sys.dao.SysDictDao;
 import io.cisco.modules.sys.entity.SysDictEntity;
@@ -26,15 +27,10 @@ SysDictDao sysDictDao;
 
     @Override
     public PageInfo<SysDictEntity> queryPage(Map<String, Object> params) {
-        String name = (String)params.get("name");
+        int page = Integer.parseInt(params.get("page").toString());
+        int limit = Integer.parseInt(params.get("limit").toString());
+        PageHelper.startPage(page,limit);
 
-//        IPage<SysDictEntity> page = this.page(
-//            new Query<SysDictEntity>().getPage(params),
-//            new QueryWrapper<SysDictEntity>()
-//                .like(StringUtils.isNotBlank(name),"name", name)
-//        );
-//
-//        return new PageUtils(page);
         List<SysDictEntity> list=sysDictDao.queryPage();
         return new PageInfo<>(list);
 

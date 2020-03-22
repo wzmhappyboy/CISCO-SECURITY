@@ -9,6 +9,7 @@
 package io.cisco.modules.sys.controller;
 
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.cisco.common.annotation.SysLog;
 import io.cisco.common.utils.R;
@@ -48,10 +49,16 @@ public class SysUserController extends AbstractController {
 	@RequestMapping("/list")
 	@RequiresPermissions("sys:user:list")
 	public R list(@RequestParam Map<String, Object> params){
-		PageInfo<SysUserEntity> page = sysUserService.queryPage(params);
+		int page = Integer.parseInt(params.get("page").toString());
+		int limit = Integer.parseInt(params.get("limit").toString());
+		PageHelper.startPage(page,limit);
 
-		return R.ok().put("page", page);
-	}
+		PageInfo<SysUserEntity> list = sysUserService.queryPage(params);
+
+		int r = (int)list.getTotal();
+
+		int sum = (int) Math.floor(r/limit)+1;
+		return R.ok().put("page", list).put("totalCount",r).put("currPage",page).put("totalPage",sum);	}
 
 	/**
 	 * 获取登录的用户信息

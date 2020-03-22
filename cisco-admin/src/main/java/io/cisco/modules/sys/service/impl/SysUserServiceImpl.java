@@ -9,6 +9,7 @@
 package io.cisco.modules.sys.service.impl;
 
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.cisco.modules.sys.dao.SysUserDao;
 import io.cisco.modules.sys.entity.SysUserEntity;
@@ -50,22 +51,10 @@ public class SysUserServiceImpl  implements SysUserService {
 
 	@Override
 	public PageInfo<SysUserEntity> queryPage(Map<String, Object> params) {
-		String username = (String)params.get("username");
+		int page = Integer.parseInt(params.get("page").toString());
+		int limit = Integer.parseInt(params.get("limit").toString());
+		PageHelper.startPage(page,limit);
 
-//		IPage<SysUserEntity> page = this.page(
-//			new Query<SysUserEntity>().getPage(params),
-//			new QueryWrapper<SysUserEntity>()
-//				.like(StringUtils.isNotBlank(username),"username", username)
-//				.apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
-//		);
-//
-//		for(SysUserEntity sysUserEntity : page.getRecords()){
-//			SysDeptEntity sysDeptEntity = sysDeptService.getById(sysUserEntity.getDeptId());
-//			sysUserEntity.setDeptName(sysDeptEntity.getName());
-//		}
-
-		//return new PageUtils(page);
-	//	PageHelper.startPage();
 	List<SysUserEntity> list=sysUserDao.queryPage();
 	return new PageInfo<>(list);
 	}

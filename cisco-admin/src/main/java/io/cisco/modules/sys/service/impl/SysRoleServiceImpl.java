@@ -8,6 +8,7 @@
 
 package io.cisco.modules.sys.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import io.cisco.modules.sys.dao.SysRoleDao;
 import io.cisco.modules.sys.entity.SysRoleEntity;
@@ -43,6 +44,9 @@ public class SysRoleServiceImpl  implements SysRoleService {
 	@Override
 	//@DataFilter(subDept = true, user = false)
 	public PageInfo<SysRoleEntity> queryPage(Map<String, Object> params) {
+		int page = Integer.parseInt(params.get("page").toString());
+		int limit = Integer.parseInt(params.get("limit").toString());
+		PageHelper.startPage(page,limit);
 		List<SysRoleEntity> list=sysRoleDao.queryPage();
 		//return new PageInfo<> (list);
 return  new PageInfo<>(list);

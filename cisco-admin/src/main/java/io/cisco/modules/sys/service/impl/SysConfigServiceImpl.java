@@ -8,6 +8,7 @@
 
 package io.cisco.modules.sys.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 import io.cisco.common.exception.RRException;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -32,15 +34,10 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 	@Override
 	public PageInfo<SysConfigEntity> queryPage(Map<String, Object> params) {
-//		String paramKey = (String)params.get("paramKey");
-//		IPage<SysConfigEntity> page = this.page(
-//			new Query<SysConfigEntity>().getPage(params),
-//			new QueryWrapper<SysConfigEntity>()
-//				.like(StringUtils.isNotBlank(paramKey),"param_key", paramKey)
-//				.eq("status", 1)
-//		);
-//
-//		return new PageUtils(page);
+		int page = Integer.parseInt(params.get("page").toString());
+		int limit = Integer.parseInt(params.get("limit").toString());
+		PageHelper.startPage(page,limit);
+
 
 		List<SysConfigEntity> list=sysConfigDao.queryPage();
 		return new PageInfo<>(list);
@@ -75,7 +72,7 @@ public class SysConfigServiceImpl  implements SysConfigService {
 			sysConfigRedis.delete(config.getParamKey());
 		}
 
-		//this.removeByIds(Arrays.asList(ids));
+		this.removeByIds(Arrays.asList(ids));
 	}
 
 	@Override
@@ -108,5 +105,11 @@ public class SysConfigServiceImpl  implements SysConfigService {
 		return sysConfigDao.getById(id);
 	}
 
-
+@Override
+	public  void  removeByIds(List<Long> longs){
+		for (int i=0;i<longs.size();i++)
+		{
+			sysConfigDao.deleteById(longs.get(i));
+		}
+}
 }

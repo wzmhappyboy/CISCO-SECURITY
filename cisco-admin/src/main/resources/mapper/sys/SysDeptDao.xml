@@ -22,7 +22,7 @@
 
 	<insert id="save" parameterType="io.cisco.modules.sys.entity.SysDeptEntity">
 		insert  into sys_dept(dept_id,parent_id,name,order_num,del_flag)
-		values (#{deptId},#{parentId},#{name},#{orderNum},#{delFlag})
+		values (#{deptId},#{parentId},#{name},#{orderNum},0)
 	</insert>
 
 	<update id="updateById" parameterType="io.cisco.modules.sys.entity.SysDeptEntity">
