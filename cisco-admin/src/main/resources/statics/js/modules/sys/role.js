@@ -96,15 +96,18 @@ var data_setting = {
 var vm = new Vue({
     el:'#rrapp',
     data:{
-        q:{
-            roleName: null
-        },
+        q:null,
         showList: true,
         title:null,
         role:{
             deptId:null,
             deptName:null
         }
+    },
+    watch:{
+      q(){
+          this.reload();
+      }
     },
     methods: {
         query: function () {
@@ -269,7 +272,7 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam','page');
             $("#jqGrid").jqGrid('setGridParam',{
-                postData:{'roleName': vm.q.roleName},
+                postData:{'roleName': vm.q},
                 page:page
             }).trigger("reloadGrid");
         }

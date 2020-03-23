@@ -44,12 +44,19 @@ public class SysRoleServiceImpl  implements SysRoleService {
 	@Override
 	//@DataFilter(subDept = true, user = false)
 	public PageInfo<SysRoleEntity> queryPage(Map<String, Object> params) {
-		int page = Integer.parseInt(params.get("page").toString());
+		if (params.get("roleName")==null||params.get("roleName").equals(""))
+		{
+			int page = Integer.parseInt(params.get("page").toString());
 		int limit = Integer.parseInt(params.get("limit").toString());
 		PageHelper.startPage(page,limit);
 		List<SysRoleEntity> list=sysRoleDao.queryPage();
-		//return new PageInfo<> (list);
-return  new PageInfo<>(list);
+return  new PageInfo<>(list);}
+		else {
+			String key = (String)params.get("roleName");
+			List<SysRoleEntity> list=sysRoleDao.getByName(key);
+			return  new PageInfo<>(list);
+
+	}
 	}
 
 	@Override

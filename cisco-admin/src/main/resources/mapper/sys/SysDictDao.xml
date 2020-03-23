@@ -11,9 +11,16 @@
         select * from sys_dict where id=#{id}
     </select>
 
+    <select id="getByName" resultType="io.cisco.modules.sys.entity.SysDictEntity" parameterType="string">
+        select  * from sys_dict where name like "%" #{name} "%"
+
+    </select>
+
+
+
     <insert id="save" parameterType="io.cisco.modules.sys.entity.SysDictEntity">
         insert  into sys_dict(name, type, code, value, order_num, remark, del_flag)
-        values (#{name},#{type},#{code},#{value},#{orderNum},#{remark},#{delFlag})
+        values (#{name},#{type},#{code},#{value},#{orderNum},#{remark},0)
 
     </insert>
 

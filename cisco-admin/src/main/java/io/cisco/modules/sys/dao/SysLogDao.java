@@ -24,6 +24,8 @@ public interface SysLogDao  {
 
     List<SysLogEntity> queryPage();
 
+    List<SysLogEntity> getByName(String name);
+
     void  save(SysLogEntity sysLogEntity);
 	
 }

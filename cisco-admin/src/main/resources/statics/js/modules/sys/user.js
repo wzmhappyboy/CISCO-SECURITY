@@ -59,9 +59,7 @@ var ztree;
 var vm = new Vue({
     el:'#rrapp',
     data:{
-        q:{
-            username: null
-        },
+        q:null,
         showList: true,
         title:null,
         roleList:{},
@@ -70,6 +68,11 @@ var vm = new Vue({
             deptId:null,
             deptName:null,
             roleIdList:[]
+        }
+    },
+    watch:{
+        q(){
+            this.reload();
         }
     },
     methods: {
@@ -200,7 +203,7 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam','page');
             $("#jqGrid").jqGrid('setGridParam',{
-                postData:{'username': vm.q.username},
+                postData:{'username': vm.q},
                 page:page
             }).trigger("reloadGrid");
         }

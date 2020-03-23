@@ -40,12 +40,15 @@ $(function () {
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
-        q:{
-            name: null
-        },
+        q:null,
 		showList: true,
 		title: null,
 		dict: {}
+	},
+	watch:{
+		q(){
+			this.reload();
+		}
 	},
 	methods: {
 		query: function () {
@@ -117,7 +120,7 @@ var vm = new Vue({
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
 			$("#jqGrid").jqGrid('setGridParam',{
-                postData:{'name': vm.q.name},
+                postData:{'name': vm.q},
                 page:page
             }).trigger("reloadGrid");
 		}

@@ -19,6 +19,7 @@ $(function () {
         rownumbers: true, 
         rownumWidth: 25, 
         autowidth:true,
+        reloadAfterSubmit: true,
         multiselect: false,
         pager: "#jqGridPager",
         jsonReader : {
@@ -42,18 +43,25 @@ $(function () {
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
-		q:{
+		// q:{
 			key: null
-		},
+		// },
 	},
+    watch: {
+    key ()
+{
+    this.reload();
+},
+
+    },
 	methods: {
 		query: function () {
 			vm.reload();
 		},
 		reload: function (event) {
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{ 
-				postData:{'key': vm.q.key},
+			$("#jqGrid").jqGrid('setGridParam',{
+				postData:{'key': vm.key},
                 page:page
             }).trigger("reloadGrid");
 		}

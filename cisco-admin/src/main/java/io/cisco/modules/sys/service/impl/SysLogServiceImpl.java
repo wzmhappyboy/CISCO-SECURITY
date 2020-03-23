@@ -26,11 +26,22 @@ public class SysLogServiceImpl  implements SysLogService {
 SysLogDao sysLogDao;
     @Override
     public PageInfo<SysLogEntity> queryPage(Map<String, Object> params) {
+        System.out.println("key:"+params.get("key"));
+        if (params.get("key")==null||params.get("key").equals("")){
         int page = Integer.parseInt(params.get("page").toString());
         int limit = Integer.parseInt(params.get("limit").toString());
         PageHelper.startPage(page,limit);
         List<SysLogEntity> list=sysLogDao.queryPage();
-        return new PageInfo<>(list);
+            return new PageInfo<>(list);
+        }
+        else {
+            String key = (String)params.get("key");
+
+            List<SysLogEntity> list=sysLogDao.getByName(key);
+            return new PageInfo<>(list);
+
+        }
+
     }
 
     @Override

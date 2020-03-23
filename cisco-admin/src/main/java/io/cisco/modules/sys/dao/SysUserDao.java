@@ -58,6 +58,9 @@ public interface SysUserDao {
 	//查询用户是否存在
 	SysUserEntity selectOne(@Param("username") String username);
 
+	//模糊查询
+	List<SysUserEntity> getByName(String  name);
+
 	void removeByIds(List<Long > ids);
 
 	List<SysUserEntity> queryPage();

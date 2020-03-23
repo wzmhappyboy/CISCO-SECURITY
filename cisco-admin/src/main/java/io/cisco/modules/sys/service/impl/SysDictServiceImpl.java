@@ -27,14 +27,24 @@ SysDictDao sysDictDao;
 
     @Override
     public PageInfo<SysDictEntity> queryPage(Map<String, Object> params) {
+        if (params.get("name")==null||params.get("name").equals(""))
+        {
         int page = Integer.parseInt(params.get("page").toString());
         int limit = Integer.parseInt(params.get("limit").toString());
         PageHelper.startPage(page,limit);
 
         List<SysDictEntity> list=sysDictDao.queryPage();
-        return new PageInfo<>(list);
+
+        return new PageInfo<>(list);}
+        else {
+
+            String key = (String)params.get("name");
+            List<SysDictEntity> list=sysDictDao.getByName(key);
+            return new PageInfo<>(list);}
 
     }
+
+
 
     @Override
     public  SysDictEntity getById(Long id){

@@ -35,6 +35,9 @@ public interface SysConfigDao  {
 
 	List<SysConfigEntity> queryPage();
 
+//	模糊查询
+	List<SysConfigEntity> getByName(String name);
+
 	void save(SysConfigEntity sysConfigEntity);
 
 	void updateById(SysConfigEntity sysConfigEntity);

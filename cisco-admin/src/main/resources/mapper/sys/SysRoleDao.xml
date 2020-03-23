@@ -9,6 +9,10 @@
         select  * from sys_role where role_id=#{id}
     </select>
 
+    <select id="getByName" resultType="io.cisco.modules.sys.entity.SysRoleEntity" parameterType="string">
+        select  * from sys_role where role_name like  "%" #{name} "%"
+    </select>
+
     <select id="queryPage" resultType="io.cisco.modules.sys.entity.SysRoleEntity">
     select  * from sys_role
 </select>

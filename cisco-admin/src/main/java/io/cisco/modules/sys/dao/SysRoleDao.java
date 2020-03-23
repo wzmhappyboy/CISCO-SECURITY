@@ -26,6 +26,8 @@ public interface SysRoleDao  {
 
     List<SysRoleEntity> queryPage();
 
+    List<SysRoleEntity> getByName(String name);
+
     void  save(SysRoleEntity sysRoleEntity);
 
     void  updateById(SysRoleEntity sysRoleEntity);

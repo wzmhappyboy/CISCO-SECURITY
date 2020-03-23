@@ -38,12 +38,17 @@ $(function () {
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
-		q:{
-            paramKey: null
-		},
+		q:null,
 		showList: true,
 		title: null,
 		config: {}
+	},
+	watch:{
+
+		q() {
+			this.reload();
+		}
+
 	},
 	methods: {
 		query: function () {
@@ -112,7 +117,7 @@ var vm = new Vue({
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
 			$("#jqGrid").jqGrid('setGridParam',{ 
-                postData:{'paramKey': vm.q.paramKey},
+                postData:{'paramKey': vm.q},
                 page:page
             }).trigger("reloadGrid");
 		}

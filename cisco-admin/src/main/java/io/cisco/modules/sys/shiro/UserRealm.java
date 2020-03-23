@@ -84,7 +84,6 @@ public class UserRealm extends AuthorizingRealm {
 
 		//查询用户信息
 		SysUserEntity user = sysUserDao.selectOne( token.getUsername());
-		System.out.println("方法里查询用户:"+user);
 		//账号不存在
 		if(user == null) {
 			throw new UnknownAccountException("账号或密码不正确");

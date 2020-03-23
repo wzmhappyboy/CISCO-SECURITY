@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -51,12 +52,22 @@ public class SysUserServiceImpl  implements SysUserService {
 
 	@Override
 	public PageInfo<SysUserEntity> queryPage(Map<String, Object> params) {
-		int page = Integer.parseInt(params.get("page").toString());
+		if (params.get("username")==null||params.get("username").equals(""))
+
+			{
+			int page = Integer.parseInt(params.get("page").toString());
 		int limit = Integer.parseInt(params.get("limit").toString());
 		PageHelper.startPage(page,limit);
 
 	List<SysUserEntity> list=sysUserDao.queryPage();
-	return new PageInfo<>(list);
+	return new PageInfo<>(list);}
+	else{
+			String key = (String)params.get("username");
+
+			List<SysUserEntity> list=sysUserDao.getByName(key);
+			return new PageInfo<>(list);
+	}
+
 	}
 
 	@Override

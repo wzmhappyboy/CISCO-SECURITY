@@ -40,6 +40,9 @@
 	select * from sys_user where user_id=#{id}
 </select>
 
+	<select id="getByName" resultType="io.cisco.modules.sys.entity.SysUserEntity" parameterType="string">
+		select  * from  sys_user where username like "%" #{name} "%"
+	</select>
 
 
 	<update id="updatePassword">

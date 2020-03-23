@@ -34,15 +34,23 @@ public class SysConfigServiceImpl  implements SysConfigService {
 
 	@Override
 	public PageInfo<SysConfigEntity> queryPage(Map<String, Object> params) {
-		int page = Integer.parseInt(params.get("page").toString());
+		if (params.get("paramKey")==null||params.get("paramKey").equals("")){
+
+			int page = Integer.parseInt(params.get("page").toString());
 		int limit = Integer.parseInt(params.get("limit").toString());
 		PageHelper.startPage(page,limit);
 
 
 		List<SysConfigEntity> list=sysConfigDao.queryPage();
-		return new PageInfo<>(list);
-
+		return new PageInfo<>(list);}
+		else {
+			String key = (String)params.get("paramKey");
+			List<SysConfigEntity> list=sysConfigDao.getByName(key);
+			return new PageInfo<>(list);
+		}
 	}
+
+
 	
 	@Override
 	public void saveConfig(SysConfigEntity config) {

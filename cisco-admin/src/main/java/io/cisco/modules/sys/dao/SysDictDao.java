@@ -25,6 +25,8 @@ public interface SysDictDao  {
 
     SysDictEntity getById(Long id);
 
+    List<SysDictEntity> getByName(String name);
+
     void  save(SysDictEntity sysDictEntity);
 
     void updateById(SysDictEntity sysDictEntity);

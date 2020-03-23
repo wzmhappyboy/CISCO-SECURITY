@@ -12,7 +12,10 @@
 		select * from sys_config where param_key = #{paramKey}
 	</select>
 
+<select id="getByName" parameterType="string" resultType="io.cisco.modules.sys.entity.SysConfigEntity">
+			select * from sys_config where param_key  like "%" #{paramKey} "%"
 
+</select>
 	<select id="queryPage" resultType="io.cisco.modules.sys.entity.SysConfigEntity">
 		select * from sys_config
 	</select>
