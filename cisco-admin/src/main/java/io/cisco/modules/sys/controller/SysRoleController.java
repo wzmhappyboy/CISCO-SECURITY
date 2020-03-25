@@ -10,6 +10,7 @@ package io.cisco.modules.sys.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.cisco.common.annotation.DataFilter;
 import io.cisco.common.annotation.SysLog;
 import io.cisco.common.utils.R;
 import io.cisco.common.validator.ValidatorUtils;
@@ -44,12 +45,13 @@ public class SysRoleController extends AbstractController {
 	 */
 	@RequestMapping("/list")
 	@RequiresPermissions("sys:role:list")
+	@DataFilter
 	public R list(@RequestParam Map<String, Object> params){
 		int page = Integer.parseInt(params.get("page").toString());
 		int limit = Integer.parseInt(params.get("limit").toString());
 		PageHelper.startPage(page,limit);
-		PageInfo<SysRoleEntity> list = sysRoleService.queryPage(params);
-
+		List<SysRoleEntity> l = sysRoleService.queryPage(params);
+	PageInfo<SysRoleEntity> list=	 new PageInfo<>(l);
 		int r = (int)list.getTotal();
 
 		int sum = (int) Math.floor(r/limit)+1;
@@ -63,7 +65,7 @@ public class SysRoleController extends AbstractController {
 	@RequiresPermissions("sys:role:select")
 	public R select(){
 		List<SysRoleEntity> list = sysRoleService.list();
-		
+		System.out.println("list:"+list);
 		return R.ok().put("list", list);
 	}
 	

@@ -17,6 +17,7 @@ import io.cisco.common.validator.Assert;
 import io.cisco.common.validator.ValidatorUtils;
 import io.cisco.common.validator.group.AddGroup;
 import io.cisco.common.validator.group.UpdateGroup;
+import io.cisco.modules.sys.dao.SysUserDao;
 import io.cisco.modules.sys.entity.SysUserEntity;
 import io.cisco.modules.sys.service.SysUserRoleService;
 import io.cisco.modules.sys.service.SysUserService;
@@ -42,6 +43,8 @@ public class SysUserController extends AbstractController {
 	private SysUserService sysUserService;
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
+	@Autowired
+	private SysUserDao sysUserDao;
 	
 	/**
 	 * 所有用户列表
@@ -113,9 +116,15 @@ public class SysUserController extends AbstractController {
 	@RequiresPermissions("sys:user:save")
 	public R save(@RequestBody SysUserEntity user){
 		ValidatorUtils.validateEntity(user, AddGroup.class);
-		
+System.out.println("保存用户："+user);
+		List<Long> longs=user.getRoleIdList();
 		sysUserService.saveUser(user);
-		
+		SysUserEntity sysUserEntity=sysUserDao.selectOne(user.getUsername());
+		Long userId=sysUserEntity.getUserId();
+		sysUserRoleService.saveOrUpdate(userId,longs);
+
+
+
 		return R.ok();
 	}
 	
@@ -128,6 +137,9 @@ public class SysUserController extends AbstractController {
 	public R update(@RequestBody SysUserEntity user){
 		ValidatorUtils.validateEntity(user, UpdateGroup.class);
 
+		List<Long> longs=user.getRoleIdList();
+		Long userId=user.getUserId();
+		sysUserRoleService.saveOrUpdate(userId,longs);
 		sysUserService.update(user);
 		
 		return R.ok();

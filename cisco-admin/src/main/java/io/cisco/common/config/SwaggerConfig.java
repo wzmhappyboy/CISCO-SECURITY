@@ -43,10 +43,10 @@ public class SwaggerConfig{
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("人人开源")
-            .description("renren-admin文档")
-            .termsOfServiceUrl("https://www.renren.io")
-            .version("4.0.0")
+            .title("科科开源")
+            .description("csico-admin文档")
+            .termsOfServiceUrl("https://www.xy250.vip")
+            .version("1.0.0")
             .build();
     }
 

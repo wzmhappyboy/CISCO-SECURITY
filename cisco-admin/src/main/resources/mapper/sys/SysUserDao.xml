@@ -13,6 +13,7 @@
 		<result property="status" column="status"/>
 		<result property="deptId" column="dept_id"/>
 		<result property="createTime" column="create_time"/>
+		<result property="deptName" column="name"/>
 	</resultMap>
 
 
@@ -55,9 +56,11 @@
 	value (#{userId},#{username},#{password},#{salt},#{email},#{mobile},#{status},#{deptId},#{createTime})
 	</insert>
 
-	<select id="queryPage" resultType="io.cisco.modules.sys.entity.SysUserEntity">
-		select  * from sys_user
-
+	<select id="queryPage" resultMap="sysUserResultMap">
+		select  * from sys_user t1 join sys_dept t2 on t1.dept_id=t2.dept_id
+		<if test="sql_filter != null">
+			and ${sql_filter}
+		</if>
 	</select>
 
 	<update id="update" parameterType="io.cisco.modules.sys.entity.SysUserEntity">

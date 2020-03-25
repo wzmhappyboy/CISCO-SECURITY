@@ -16,11 +16,11 @@
 	</parent>
 
     <modules>
-        <module>renren-common</module>
-        <module>renren-admin</module>
-        <module>renren-api</module>
-		<module>renren-dynamic-datasource</module>
-        <module>renren-generator</module>
+        <module>cisco-common</module>
+        <module>cisco-admin</module>
+        <module>cisco-api</module>
+		<module>cisco-dynamic-datasource</module>
+        <module>cisco-generator</module>
     </modules>
 
     <properties>

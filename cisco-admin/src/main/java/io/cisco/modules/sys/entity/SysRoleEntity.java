@@ -57,12 +57,10 @@ public class SysRoleEntity implements Serializable {
 	/**
 	 * 部门名称
 	 */
-	@TableField(exist=false)
 	private String deptName;
 
-	@TableField(exist=false)
 	private List<Long> menuIdList;
-	@TableField(exist=false)
+
 	private List<Long> deptIdList;
 	
 	/**

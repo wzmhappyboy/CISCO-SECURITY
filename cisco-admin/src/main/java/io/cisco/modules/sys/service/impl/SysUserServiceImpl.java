@@ -11,7 +11,10 @@ package io.cisco.modules.sys.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.cisco.common.annotation.DataFilter;
+import io.cisco.modules.sys.dao.SysRoleDao;
 import io.cisco.modules.sys.dao.SysUserDao;
+import io.cisco.modules.sys.dao.SysUserRoleDao;
 import io.cisco.modules.sys.entity.SysUserEntity;
 import io.cisco.modules.sys.service.SysDeptService;
 import io.cisco.modules.sys.service.SysUserRoleService;
@@ -42,7 +45,8 @@ public class SysUserServiceImpl  implements SysUserService {
 	private SysDeptService sysDeptService;
 	@Autowired
 	SysUserDao sysUserDao;
-
+	@Autowired
+	SysUserRoleDao sysUserRoleDao;
 
 
 	@Override
@@ -51,6 +55,7 @@ public class SysUserServiceImpl  implements SysUserService {
 	}
 
 	@Override
+	@DataFilter(subDept = true, user = false)
 	public PageInfo<SysUserEntity> queryPage(Map<String, Object> params) {
 		if (params.get("username")==null||params.get("username").equals(""))
 
@@ -117,6 +122,10 @@ public class SysUserServiceImpl  implements SysUserService {
 	@Override
 	public void removeByIds(List<Long > ids){
 		sysUserDao.removeByIds(ids);
+		for (int i=0;i<ids.size();i++)
+		{
+			sysUserRoleDao.remove(ids.get(i));
+		}
 	}
 
 

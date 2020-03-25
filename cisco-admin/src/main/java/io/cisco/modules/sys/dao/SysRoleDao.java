@@ -12,6 +12,7 @@ import io.cisco.modules.sys.entity.SysRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 角色管理
@@ -24,7 +25,7 @@ public interface SysRoleDao  {
 
     SysRoleEntity getById(Long id);
 
-    List<SysRoleEntity> queryPage();
+    List<SysRoleEntity> queryPage(Map<String, Object> params);
 
     List<SysRoleEntity> getByName(String name);
 

@@ -10,6 +10,8 @@ package io.cisco.modules.sys.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import io.cisco.common.annotation.DataFilter;
+import io.cisco.common.utils.Constant;
 import io.cisco.modules.sys.dao.SysRoleDao;
 import io.cisco.modules.sys.entity.SysRoleEntity;
 import io.cisco.modules.sys.service.*;
@@ -42,19 +44,21 @@ public class SysRoleServiceImpl  implements SysRoleService {
 	private  SysRoleDao sysRoleDao;
 
 	@Override
-	//@DataFilter(subDept = true, user = false)
-	public PageInfo<SysRoleEntity> queryPage(Map<String, Object> params) {
+	@DataFilter(subDept = true, user = false,tableAlias = "t1")
+	public List<SysRoleEntity> queryPage(Map<String, Object> params) {
 		if (params.get("roleName")==null||params.get("roleName").equals(""))
 		{
 			int page = Integer.parseInt(params.get("page").toString());
 		int limit = Integer.parseInt(params.get("limit").toString());
 		PageHelper.startPage(page,limit);
-		List<SysRoleEntity> list=sysRoleDao.queryPage();
-return  new PageInfo<>(list);}
+		List<SysRoleEntity> list=sysRoleDao.queryPage( params);
+
+return  list;
+		}
 		else {
 			String key = (String)params.get("roleName");
 			List<SysRoleEntity> list=sysRoleDao.getByName(key);
-			return  new PageInfo<>(list);
+			return   list;
 
 	}
 	}
@@ -112,7 +116,7 @@ return  new PageInfo<>(list);}
 
 	@Override
 	public List<SysRoleEntity> list(){
-		return this.list();
+		return sysRoleDao.list();
 	}
 
 @Override

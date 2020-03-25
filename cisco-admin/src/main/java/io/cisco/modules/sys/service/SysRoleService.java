@@ -34,7 +34,7 @@ public interface SysRoleService  {
 
 	SysRoleEntity getById(Long id);
 
-	PageInfo<SysRoleEntity> queryPage(Map<String, Object> params);
+	List<SysRoleEntity> queryPage(Map<String, Object> params);
 
 	void deleteByIds(List<Long> longs);
 }

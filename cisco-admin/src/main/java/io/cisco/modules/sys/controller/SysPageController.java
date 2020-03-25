@@ -50,4 +50,8 @@ public class SysPageController {
 		return "404";
 	}
 
+	@RequestMapping("druid/sql.html")
+	public String druid()
+	{return  "http://localhost:8080/druid/index.html";}
+
 }
