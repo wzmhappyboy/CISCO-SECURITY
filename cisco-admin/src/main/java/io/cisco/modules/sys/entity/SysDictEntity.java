@@ -22,7 +22,7 @@ import java.io.Serializable;
  * @author Mark sunlightcs@gmail.com
  */
 @Data
-@TableName("sys_dict")
+//@TableName("sys_dict")
 public class SysDictEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -59,7 +59,7 @@ public class SysDictEntity implements Serializable {
 	/**
 	 * 删除标记  -1：已删除  0：正常
 	 */
-	@TableLogic
+//	@TableLogic
 	private Integer delFlag;
 
 }

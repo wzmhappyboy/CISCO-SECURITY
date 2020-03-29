@@ -18,6 +18,8 @@ public class RRException extends RuntimeException {
 	
     private String msg;
     private int code = 500;
+
+    private int bbb;
     
     public RRException(String msg) {
 		super(msg);

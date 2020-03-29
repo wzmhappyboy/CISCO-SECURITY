@@ -37,8 +37,8 @@ public class ShiroConfig {
      * 单机环境，session交给shiro管理
      */
     @Bean
-    @ConditionalOnProperty(prefix = "renren", name = "cluster", havingValue = "false")
-    public DefaultWebSessionManager sessionManager(@Value("${renren.globalSessionTimeout:3600}") long globalSessionTimeout){
+    @ConditionalOnProperty(prefix = "cisco", name = "cluster", havingValue = "false")
+    public DefaultWebSessionManager sessionManager(@Value("${cisco.globalSessionTimeout:3600}") long globalSessionTimeout){
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         sessionManager.setSessionValidationSchedulerEnabled(true);
         sessionManager.setSessionIdUrlRewritingEnabled(false);
@@ -52,7 +52,7 @@ public class ShiroConfig {
      * 集群环境，session交给spring-session管理
      */
     @Bean
-    @ConditionalOnProperty(prefix = "renren", name = "cluster", havingValue = "true")
+    @ConditionalOnProperty(prefix = "cisco", name = "cluster", havingValue = "true")
     public ServletContainerSessionManager servletContainerSessionManager() {
         return new ServletContainerSessionManager();
     }

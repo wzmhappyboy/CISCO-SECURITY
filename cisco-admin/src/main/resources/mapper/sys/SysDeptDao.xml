@@ -4,8 +4,8 @@
 <mapper namespace="io.cisco.modules.sys.dao.SysDeptDao">
 
 	<select id="queryList" resultType="io.cisco.modules.sys.entity.SysDeptEntity">
-		select t1.*,(select t2.name from sys_dept t2 where t2.dept_id=t1.parent_id)parentName from sys_dept t1 where 
-			t1.del_flag = 0
+		select t1.*,(select t2.name from sys_dept t2 where t2.dept_id=t1.parent_id)parentName from sys_dept t1
+		where t1.del_flag = 0
 		<if test="sql_filter != null">
 			and ${sql_filter}
 		</if>
@@ -32,6 +32,5 @@
 
 	<delete id="removeById" parameterType="long">
 		delete  from sys_dept where dept_id =#{id}
-
 	</delete>
 </mapper>

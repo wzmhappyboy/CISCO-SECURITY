@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public interface SysUserService  {
 
-	PageInfo<SysUserEntity> queryPage(Map<String, Object> params);
+	List<SysUserEntity> queryPage(Map<String, Object> params);
 	
 	/**
 	 * 查询用户的所有菜单ID

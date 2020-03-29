@@ -56,8 +56,8 @@ public class SysUserController extends AbstractController {
 		int limit = Integer.parseInt(params.get("limit").toString());
 		PageHelper.startPage(page,limit);
 
-		PageInfo<SysUserEntity> list = sysUserService.queryPage(params);
-
+		List<SysUserEntity> l = sysUserService.queryPage(params);
+		PageInfo<SysUserEntity> list=new PageInfo<>(l);
 		int r = (int)list.getTotal();
 
 		int sum = (int) Math.floor(r/limit)+1;

@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 系统用户
@@ -63,6 +64,6 @@ public interface SysUserDao {
 
 	void removeByIds(List<Long > ids);
 
-	List<SysUserEntity> queryPage();
+	List<SysUserEntity> queryPage(Map<String, Object> params);
 
 }

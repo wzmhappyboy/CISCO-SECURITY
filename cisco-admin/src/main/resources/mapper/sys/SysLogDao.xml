@@ -14,7 +14,6 @@
 
     <select id="getByName" parameterType="String" resultType="io.cisco.modules.sys.entity.SysLogEntity">
         select  * from sys_log where username like  "%" #{name} "%" OR  operation like  "%" #{name} "%"
-
     </select>
 
 </mapper>

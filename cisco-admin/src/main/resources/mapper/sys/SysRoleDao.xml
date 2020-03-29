@@ -38,7 +38,6 @@
     <update id="updateById" parameterType="io.cisco.modules.sys.entity.SysRoleEntity">
         update sys_role set role_name=#{roleName},remark=#{remark},dept_id=#{deptId},create_time=#{createTime}
         where role_id=#{roleId}
-
     </update>
 
     <delete id="deleteById" parameterType="long">

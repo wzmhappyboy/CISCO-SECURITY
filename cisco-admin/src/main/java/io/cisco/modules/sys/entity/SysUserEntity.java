@@ -29,7 +29,6 @@ import java.util.List;
  * @author Mark sunlightcs@gmail.com
  */
 @Data
-@TableName("sys_user")
 public class SysUserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
@@ -77,7 +76,7 @@ public class SysUserEntity implements Serializable {
 	/**
 	 * 角色ID列表
 	 */
-	@TableField(exist=false)
+//	@TableField(exist=false)
 	private List<Long> roleIdList;
 
 	/**
@@ -94,6 +93,6 @@ public class SysUserEntity implements Serializable {
 	/**
 	 * 部门名称
 	 */
-	@TableField(exist=false)
+//	@TableField(exist=false)
 	private String deptName;
 }

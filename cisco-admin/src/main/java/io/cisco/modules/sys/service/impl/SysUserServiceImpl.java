@@ -55,8 +55,8 @@ public class SysUserServiceImpl  implements SysUserService {
 	}
 
 	@Override
-	@DataFilter(subDept = true, user = false)
-	public PageInfo<SysUserEntity> queryPage(Map<String, Object> params) {
+	@DataFilter(subDept = true, user = false,tableAlias = "t1")
+	public List<SysUserEntity> queryPage(Map<String, Object> params) {
 		if (params.get("username")==null||params.get("username").equals(""))
 
 			{
@@ -64,13 +64,13 @@ public class SysUserServiceImpl  implements SysUserService {
 		int limit = Integer.parseInt(params.get("limit").toString());
 		PageHelper.startPage(page,limit);
 
-	List<SysUserEntity> list=sysUserDao.queryPage();
-	return new PageInfo<>(list);}
+	List<SysUserEntity> list=sysUserDao.queryPage(params);
+	return  list;}
 	else{
 			String key = (String)params.get("username");
 
 			List<SysUserEntity> list=sysUserDao.getByName(key);
-			return new PageInfo<>(list);
+			return list;
 	}
 
 	}

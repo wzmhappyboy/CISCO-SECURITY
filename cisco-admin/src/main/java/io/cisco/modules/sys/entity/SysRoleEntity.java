@@ -27,7 +27,6 @@ import java.util.List;
  * @author Mark sunlightcs@gmail.com
  */
 @Data
-@TableName("sys_role")
 public class SysRoleEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
