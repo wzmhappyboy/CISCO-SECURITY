@@ -22,6 +22,7 @@ public class SysPageController {
 	
 	@RequestMapping("modules/{module}/{url}.html")
 	public String module(@PathVariable("module") String module, @PathVariable("url") String url){
+		System.out.println("modules/" + module + "/" + url);
 		return "modules/" + module + "/" + url;
 	}
 
