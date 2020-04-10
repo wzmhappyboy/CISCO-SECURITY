@@ -9,7 +9,7 @@
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
-			<a class="btn btn-danger" @click="addConfig"><i class="fa fa-sun-o"></i>&nbsp;云存储配置</a>
+			<a class="btn btn-danger"  @click="add2"><i class="fa fa-sun-o"></i>&nbsp;云存储配置</a>
 			<a class="btn btn-primary" id="upload"><i class="fa fa-plus"></i>&nbsp;上传文件</a>
 			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 		</div>
@@ -159,6 +159,6 @@
 	</div>
 </div>
 
-<script src="${request.contextPath}/statics/js/modules/oss/oss.js?_${.now?long}"></script>
+<script src="${request.contextPath}/statics/js/modules/sys/oss.js?_${.now?long}"></script>
 </body>
 </html>

@@ -8,6 +8,8 @@
 
 package io.cisco.modules.oss.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 
 
@@ -34,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -57,10 +60,16 @@ public class SysOssController {
 	@RequestMapping("/list")
 	@RequiresPermissions("sys:oss:all")
 	public R list(@RequestParam Map<String, Object> params){
-		//PageUtils page = sysOssService.queryPage(params);
+//		PageUtils page = sysOssService.queryPage(params);
+		int page = Integer.parseInt(params.get("page").toString());
+		int limit = Integer.parseInt(params.get("limit").toString());
+		PageHelper.startPage(page,limit);
+		List<SysOssEntity> l=sysOssService.queryPage(params);
+		PageInfo<SysOssEntity> list=new PageInfo<>(l);
+		int r = (int)list.getTotal();
 
-		//return R.ok().put("page", page);
-		return R.ok();
+		int sum = (int) Math.floor(r/limit)+1;
+		return R.ok().put("page", list).put("totalCount",r).put("currPage",page).put("totalPage",sum);
 	}
 
 
@@ -71,7 +80,7 @@ public class SysOssController {
     @RequiresPermissions("sys:oss:all")
     public R config(){
         CloudStorageConfig config = sysConfigService.getConfigObject(KEY, CloudStorageConfig.class);
-
+		System.out.println("config"+config);
         return R.ok().put("config", config);
     }
 
@@ -113,12 +122,15 @@ public class SysOssController {
 		}
 
 		//上传文件
+		String name = file.getOriginalFilename();
 		String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+
 		String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
 
 		//保存文件信息
 		SysOssEntity ossEntity = new SysOssEntity();
 		ossEntity.setUrl(url);
+		ossEntity.setName(name);
 		ossEntity.setCreateDate(new Date());
 		sysOssService.save(ossEntity);
 

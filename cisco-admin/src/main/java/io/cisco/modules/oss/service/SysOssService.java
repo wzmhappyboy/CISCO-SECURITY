@@ -13,6 +13,7 @@ import com.github.pagehelper.PageInfo;
 import io.cisco.modules.oss.entity.SysOssEntity;
 
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +21,12 @@ import java.util.Map;
  *
  * @author Mark sunlightcs@gmail.com
  */
-public interface SysOssService extends IService<SysOssEntity> {
+public interface SysOssService {
 
-//	PageInfo<SysOssEntity> queryPage(Map<String, Object> params);
+	List<SysOssEntity> queryPage(Map<String, Object> params);
+
+	void save(SysOssEntity sysOssEntity);
+
+	void removeByIds(List<Long > ids);
+
 }

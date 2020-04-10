@@ -8,6 +8,7 @@
 
 package io.cisco.modules.sys.dao;
 
+import io.cisco.modules.oss.entity.SysOssEntity;
 import io.cisco.modules.sys.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -65,5 +66,8 @@ public interface SysUserDao {
 	void removeByIds(List<Long > ids);
 
 	List<SysUserEntity> queryPage(Map<String, Object> params);
+
+
+	List<SysOssEntity> queryPage2();
 
 }

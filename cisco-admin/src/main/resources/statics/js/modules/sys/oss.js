@@ -5,13 +5,22 @@ $(function () {
         colModel: [			
 			{ label: 'id', name: 'id', width: 20, key: true },
             { label: 'URL地址', name: 'url', width: 160 },
-			{ label: '创建时间', name: 'createDate', width: 40 }
+            { label: '文件名', name: 'name', width: 60 },
+            { label: '创建时间', name: 'createDate', width: 40 },
+            // {
+            //     formatter:function (cellValue,options,rowdata) {
+            //         var selectHtml="<a href=rowdata.url>下载</a>";
+            //         return selectHtml
+            //     }
+            // }
+
+            {label:'操作',formatter:editLink,width:30}
         ],
 		viewrecords: true,
         height: 385,
         rowNum: 10,
 		rowList : [10,30,50],
-        rownumbers: true, 
+        //rownumbers: true,
         rownumWidth: 25, 
         autowidth:true,
         multiselect: true,
@@ -32,6 +41,9 @@ $(function () {
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
         }
     });
+    function editLink(cellValue,options,rowdata,action) {
+        return "<a href='"+rowdata.url+"'>下载</a>";
+    }
 
     new AjaxUpload('#upload', {
         action: baseURL + "sys/oss/upload",
@@ -43,10 +55,10 @@ $(function () {
                 alert("云存储配置未配置");
                 return false;
             }
-            if (!(extension && /^(jpg|jpeg|png|gif)$/.test(extension.toLowerCase()))){
-                alert('只支持jpg、png、gif格式的图片！');
-                return false;
-            }
+            // if (!(extension && /^(jpg|jpeg|png|gif)$/.test(extension.toLowerCase()))){
+            //     alert('只支持jpg、png、gif格式的图片！');
+            //     return false;
+            // }
         },
         onComplete : function(file, r){
             if(r.code == 0){
@@ -65,7 +77,11 @@ var vm = new Vue({
 	data:{
 		showList: true,
 		title: null,
-        config: {}
+        config: {
+		    type:1
+
+        },
+
 	},
     created: function(){
         this.getConfig();
@@ -80,7 +96,7 @@ var vm = new Vue({
 				vm.config = r.config;
             });
         },
-		addConfig: function(){
+		add2: function(){
 			vm.showList = false;
 			vm.title = "云存储配置";
 		},
