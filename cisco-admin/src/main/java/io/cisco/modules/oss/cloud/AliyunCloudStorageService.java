@@ -9,6 +9,7 @@
 package io.cisco.modules.oss.cloud;
 
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.ObjectMetadata;
 import io.cisco.common.exception.RRException;
 
 import java.io.ByteArrayInputStream;
@@ -41,6 +42,7 @@ public class AliyunCloudStorageService extends CloudStorageService {
 
     @Override
     public String upload(InputStream inputStream, String path) {
+
         try {
             client.putObject(config.getAliyunBucketName(), path, inputStream);
         } catch (Exception e){
@@ -49,7 +51,18 @@ public class AliyunCloudStorageService extends CloudStorageService {
 
         return config.getAliyunDomain() + "/" + path;
     }
+    @Override
+    public String uploadPhoto(InputStream inputStream, String path) {
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType("image/jpg");
+        try {
+            client.putObject(config.getAliyunBucketName(), path, inputStream,objectMetadata);
+        } catch (Exception e){
+            throw new RRException("上传文件失败，请检查配置信息", e);
+        }
 
+        return config.getAliyunDomain() + "/" + path;
+    }
     @Override
     public String uploadSuffix(byte[] data, String suffix) {
         return upload(data, getPath(config.getAliyunPrefix(), suffix));

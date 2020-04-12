@@ -56,8 +56,8 @@
 
 
 	<insert id="saveUser" parameterType="io.cisco.modules.sys.entity.SysUserEntity">
-	insert into sys_user(user_id,username,password,salt,email,mobile,status,dept_id,create_time)
-	value (#{userId},#{username},#{password},#{salt},#{email},#{mobile},#{status},#{deptId},#{createTime})
+	insert into sys_user(user_id,username,password,salt,email,mobile,status,dept_id,create_time,url)
+	value (#{userId},#{username},#{password},#{salt},#{email},#{mobile},#{status},#{deptId},#{createTime},#{url})
 	</insert>
 
 	<select id="queryPage" resultMap="sysUserResultMap">
@@ -68,7 +68,7 @@
 	</select>
 
 	<update id="update" parameterType="io.cisco.modules.sys.entity.SysUserEntity">
-	update sys_user set username=#{username},password=#{password},salt=#{salt},email=#{email},mobile=#{mobile},status=#{status},dept_id=#{deptId},create_time=#{createTime}
+	update sys_user set username=#{username},password=#{password},salt=#{salt},email=#{email},mobile=#{mobile},status=#{status},dept_id=#{deptId},create_time=#{createTime},url=#{url}
 where user_id=#{userId}
 	</update>
 

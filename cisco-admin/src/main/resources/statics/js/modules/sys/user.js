@@ -40,6 +40,28 @@ $(function () {
         	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
         }
     });
+
+    new AjaxUpload('#upload', {
+        action: baseURL + "sys/oss/uploadphoto",
+        name: 'file',
+        autoSubmit:true,
+        responseType:"json",
+        onSubmit:function(file, extension){
+
+            if (!(extension && /^(jpg|jpeg|png|gif)$/.test(extension.toLowerCase()))){
+                alert('只支持jpg、png、gif格式的图片！');
+                return false;
+            }
+        },
+        onComplete : function(file, r){
+            if(r.code == 0){
+                vm.user.url=r.url;
+            }else{
+                alert(r.msg);
+            }
+        }
+    });
+
 });
 var setting = {
     data: {
@@ -68,7 +90,8 @@ var vm = new Vue({
             deptId:null,
             deptName:null,
             roleIdList:[]
-        }
+        },
+        url:null
     },
     watch:{
         q(){
@@ -83,7 +106,7 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "新增";
             vm.roleList = {};
-            vm.user = {deptName:null, deptId:null, status:1, roleIdList:[]};
+            vm.user = {deptName:null, deptId:null, status:1, roleIdList:[],url:null};
 
             //获取角色信息
             this.getRoleList();

@@ -75,7 +75,15 @@ public class QcloudCloudStorageService extends CloudStorageService {
             throw new RRException("上传文件失败", e);
         }
     }
-
+    @Override
+    public String uploadPhoto(InputStream inputStream, String path) {
+        try {
+            byte[] data = IOUtils.toByteArray(inputStream);
+            return this.upload(data, path);
+        } catch (IOException e) {
+            throw new RRException("上传文件失败", e);
+        }
+    }
     @Override
     public String uploadSuffix(byte[] data, String suffix) {
         return upload(data, getPath(config.getQcloudPrefix(), suffix));

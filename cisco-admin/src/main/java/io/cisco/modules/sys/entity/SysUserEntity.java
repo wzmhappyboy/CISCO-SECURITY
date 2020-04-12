@@ -95,4 +95,8 @@ public class SysUserEntity implements Serializable {
 	 */
 //	@TableField(exist=false)
 	private String deptName;
+/**
+ * 用户头像URL
+ */
+	private String url;
 }

@@ -66,6 +66,13 @@ public abstract class CloudStorageService {
      * @return              返回http地址
      */
     public abstract String upload(InputStream inputStream, String path);
+    /**
+     * 更新图片
+     * @param inputStream   字节流
+     * @param path          文件路径，包含文件名
+     * @return              返回http地址
+     */
+    public abstract String uploadPhoto(InputStream inputStream, String path);
 
     /**
      * 文件上传

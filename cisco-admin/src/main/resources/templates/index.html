@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -46,6 +46,8 @@
 		</ul>
       </div>
     </nav>
+
+
   </header>
 
   <!-- =============================================== -->
@@ -56,6 +58,16 @@
     <section class="sidebar">
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img v-bind:src="user.url" class="img-circle elevation-2" alt="User Image">
+                </div>
+
+            </div>
+        </div>
+
       <ul class="sidebar-menu">
         <li class="header">导航菜单</li>
         
