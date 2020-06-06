@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class SysPageController {
-	
+
 	@RequestMapping("modules/{module}/{url}.html")
 	public String module(@PathVariable("module") String module, @PathVariable("url") String url){
 		System.out.println("modules/" + module + "/" + url);
@@ -54,5 +54,11 @@ public class SysPageController {
 	@RequestMapping("druid/sql.html")
 	public String druid()
 	{return  "http://localhost:8080/druid/index.html";}
+
+	@RequestMapping("/management.html")
+	public String manage()
+	{
+		return "management";
+	}
 
 }

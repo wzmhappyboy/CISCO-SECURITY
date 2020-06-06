@@ -25,10 +25,10 @@
     </select>
 
     <select id="queryPage"  resultMap="sysRoleResultMap">
-    select  t1.role_id,t1.role_name,t2.name,t1.remark,t1.create_time from sys_role t1  join sys_dept t2 on t1.dept_id=t2.dept_id
-        <if test="sql_filter != null">
-            and ${sql_filter}
-        </if>
+    select  t1.role_id,t1.role_name,t1.remark,t1.create_time from sys_role t1
+<!--        <if test="sql_filter != null">-->
+<!--            and ${sql_filter}-->
+<!--        </if>-->
 </select>
 
     <insert id="save" parameterType="io.cisco.modules.sys.entity.SysRoleEntity">

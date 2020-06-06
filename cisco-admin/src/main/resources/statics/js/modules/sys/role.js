@@ -5,7 +5,7 @@ $(function () {
         colModel: [
             { label: '角色ID', name: 'roleId', index: "role_id", width: 45, key: true },
             { label: '角色名称', name: 'roleName', index: "role_name", width: 75 },
-            { label: '所属部门', name: 'deptName', sortable: false, width: 75 },
+            // { label: '管理项目', name: 'deptName', sortable: false, width: 75 },
             { label: '备注', name: 'remark', width: 100 },
             { label: '创建时间', name: 'createTime', index: "create_time", width: 80}
         ],
@@ -116,7 +116,7 @@ var vm = new Vue({
         add: function(){
             vm.showList = false;
             vm.title = "新增";
-            vm.role = {deptName:null, deptId:null};
+            vm.role = {deptName:null, deptId:3};
             vm.getMenuTree(null);
 
             vm.getDept();
@@ -252,7 +252,7 @@ var vm = new Vue({
                 type: 1,
                 offset: '50px',
                 skin: 'layui-layer-molv',
-                title: "选择部门",
+                title: "选择项目",
                 area: ['300px', '450px'],
                 shade: 0,
                 shadeClose: false,
