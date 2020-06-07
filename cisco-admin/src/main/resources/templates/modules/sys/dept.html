@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<div>
 <head>
 <title>项目管理</title>
 <#include "/header.html">
@@ -13,6 +13,7 @@
 </head>
 
 <div id="rrapp" v-cloak>
+	<div v-show="xmmx">
 	<div v-show="showList">
 		<div class="grid-btn">
 			<#if shiro.hasPermission("sys:dept:save")>
@@ -25,7 +26,7 @@
 			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
 			</#if>
 <#if shiro.hasPermission("sys:dept:manage")>
-<a class="btn btn-primary" ><i class="fa fa-pencil-square-o"></i>&nbsp;报销管理</a>
+<a class="btn btn-primary" @click="manage" ><i class="fa fa-pencil-square-o"></i>&nbsp;报销管理</a>
 </#if>
 </div>
 		<table id="deptTable" data-mobile-responsive="true" data-click-to-select="true">
@@ -67,7 +68,23 @@
 	</div>
 </div>
 
-<!-- 选择部门 -->
+<div v-show="!xmmx">
+	<table class="table table-bordered" style="width: 600px;text-align:center" >
+
+		<tr><td>发票号</td><td>物品名称</td><td>规格</td><td>数量</td><td>价格</td></tr>
+		<tr v-for="bxmx in bxmxs">
+			<td v-text="bxmx.id"></td>
+			<td v-text="bxmx.name"></td>
+			<td v-text="bxmx.size"></td>
+			<td v-text="bxmx.number"></td>
+			<td v-text="bxmx.price"></td>
+
+</tr>
+	</table>				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+
+</div>
+</div>
+<!-- 选择项目 -->
 <div id="deptLayer" style="display: none;padding:10px;">
 	<ul id="deptTree" class="ztree"></ul>
 </div>

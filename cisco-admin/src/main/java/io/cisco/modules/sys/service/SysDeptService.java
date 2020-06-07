@@ -26,13 +26,16 @@ public interface SysDeptService  {
 	List<SysDeptEntity> queryList(Map<String, Object> map);
 
 	/**
-	 * 查询子部门ID列表
-	 * @param parentId  上级部门ID
+	 * 查询子项目ID列表
+	 * @param parentId  上级项目ID
 	 */
 	List<Long> queryDetpIdList(Long parentId);
 
+	List<Long> queryDetpIdList2(Long parentId);
+
+
 	/**
-	 * 获取子部门ID，用于数据过滤
+	 * 获取子项目ID，用于数据过滤
 	 */
 	List<Long> getSubDeptIdList(Long deptId);
 

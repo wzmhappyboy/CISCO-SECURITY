@@ -17,7 +17,9 @@ var vm = new Vue({
     el:'#rrapp',
     data:{
         showList: true,
+        xmmx:true,
         title: null,
+        bxmxs:null,
         dept:{
             parentName:null,
             parentId:0,
@@ -26,7 +28,7 @@ var vm = new Vue({
     },
     methods: {
         getDept: function(){
-            //加载部门树
+            //加载项目树
             $.get(baseURL + "sys/dept/select", function(r){
                 ztree = $.fn.zTree.init($("#deptTree"), setting, r.deptList);
                 var node = ztree.getNodeByParam("deptId", vm.dept.parentId);
@@ -40,6 +42,24 @@ var vm = new Vue({
             vm.title = "新增";
             vm.dept = {parentName:null,parentId:0,orderNum:0};
             vm.getDept();
+        },
+        manage: function(){
+            var deptId =getDeptId();
+
+            $.ajax({
+                type: "POST",
+                url:  "/management.html",
+                data:{
+                    "id":deptId,
+                },
+                success: function(data) {
+                    vm.bxmxs=data.list;
+                    vm.xmmx=false;
+                },
+                error:function (data) {
+                    alert("系统错误");
+                }
+            });
         },
         update: function () {
             var deptId = getDeptId();
@@ -119,6 +139,7 @@ var vm = new Vue({
         },
         reload: function () {
             vm.showList = true;
+            vm.xmmx=true;
             Dept.table.refresh();
         }
     }

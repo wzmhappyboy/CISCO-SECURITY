@@ -8,9 +8,15 @@
 
 package io.cisco.modules.sys.controller;
 
+import io.cisco.modules.sys.entity.Bxmx;
+import io.cisco.modules.sys.service.BxmxService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 系统页面视图
@@ -19,6 +25,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class SysPageController {
+	@Autowired
+	private BxmxService bxmxService;
+
 
 	@RequestMapping("modules/{module}/{url}.html")
 	public String module(@PathVariable("module") String module, @PathVariable("url") String url){
@@ -55,10 +64,19 @@ public class SysPageController {
 	public String druid()
 	{return  "http://localhost:8080/druid/index.html";}
 
-	@RequestMapping("/management.html")
-	public String manage()
+	@ResponseBody
+	@PostMapping("/management.html")
+	public Map<String,Object> manage(@RequestParam("id") String id)
 	{
-		return "management";
+		int id2=Integer.parseInt(id);
+		Long l=(long)id2;
+		List<Bxmx> list=bxmxService.queryPassBxmx(l);
+		System.out.println("bxmx.id:"+list.get(0).getId());
+		Map<String,Object> result=new HashMap<>();
+		result.put("list",list);
+		return result;
+
+
 	}
 
 }

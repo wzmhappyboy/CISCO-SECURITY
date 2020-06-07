@@ -30,6 +30,8 @@ public interface SysDeptDao  {
      */
     List<Long> queryDetpIdList(Long parentId);
 
+    List<Long> queryDetpIdList2(Long parentId);
+
     SysDeptEntity getById(long id);
 
     void  save(SysDeptEntity sysDeptEntity);

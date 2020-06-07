@@ -19,9 +19,9 @@ import java.util.List;
 
 
 /**
- * 部门管理
+ * 项目管理
  *
- * @author Mark sunlightcs@gmail.com
+ * @author 王子铭
  */
 @Data
 @TableName("sys_dept")
@@ -29,20 +29,20 @@ public class SysDeptEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 部门ID
+	 * 项目ID
 	 */
 	@TableId
 	private Long deptId;
 	/**
-	 * 上级部门ID，一级部门为0
+	 * 上级项目ID，一级项目为0
 	 */
 	private Long parentId;
 	/**
-	 * 部门名称
+	 * 项目名称
 	 */
 	private String name;
 	/**
-	 * 上级部门名称
+	 * 上级项目名称
 	 */
 	@TableField(exist=false)
 	private String parentName;

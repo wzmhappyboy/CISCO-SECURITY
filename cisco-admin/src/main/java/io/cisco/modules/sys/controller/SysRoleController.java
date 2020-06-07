@@ -28,7 +28,7 @@ import java.util.Map;
 /**
  * 角色管理
  *
- * @author Mark sunlightcs@gmail.com
+ * @author 王子铭
  */
 @RestController
 @RequestMapping("/sys/role")
@@ -39,7 +39,7 @@ public class SysRoleController extends AbstractController {
 	private SysRoleMenuService sysRoleMenuService;
 	@Autowired
 	private SysRoleDeptService sysRoleDeptService;
-	
+
 	/**
 	 * 角色列表
 	 */
@@ -57,7 +57,7 @@ public class SysRoleController extends AbstractController {
 		int sum = (int) Math.floor(r/limit)+1;
 		return R.ok().put("page", list).put("totalCount",r).put("currPage",page).put("totalPage",sum);
 	}
-	
+
 	/**
 	 * 角色列表
 	 */
@@ -68,7 +68,7 @@ public class SysRoleController extends AbstractController {
 		System.out.println("list:"+list);
 		return R.ok().put("list", list);
 	}
-	
+
 	/**
 	 * 角色信息
 	 */
@@ -76,7 +76,7 @@ public class SysRoleController extends AbstractController {
 	@RequiresPermissions("sys:role:info")
 	public R info(@PathVariable("roleId") Long roleId){
 		SysRoleEntity role = sysRoleService.getById(roleId);
-		
+
 		//查询角色对应的菜单
 		List<Long> menuIdList = sysRoleMenuService.queryMenuIdList(roleId);
 		role.setMenuIdList(menuIdList);
@@ -84,10 +84,10 @@ public class SysRoleController extends AbstractController {
 		//查询角色对应的部门
 		List<Long> deptIdList = sysRoleDeptService.queryDeptIdList(new Long[]{roleId});
 		role.setDeptIdList(deptIdList);
-		
+
 		return R.ok().put("role", role);
 	}
-	
+
 	/**
 	 * 保存角色
 	 */
@@ -96,12 +96,12 @@ public class SysRoleController extends AbstractController {
 	@RequiresPermissions("sys:role:save")
 	public R save(@RequestBody SysRoleEntity role){
 		ValidatorUtils.validateEntity(role);
-		
+
 		sysRoleService.saveRole(role);
-		
+
 		return R.ok();
 	}
-	
+
 	/**
 	 * 修改角色
 	 */
@@ -110,12 +110,12 @@ public class SysRoleController extends AbstractController {
 	@RequiresPermissions("sys:role:update")
 	public R update(@RequestBody SysRoleEntity role){
 		ValidatorUtils.validateEntity(role);
-		
+
 		sysRoleService.update(role);
-		
+
 		return R.ok();
 	}
-	
+
 	/**
 	 * 删除角色
 	 */
@@ -124,7 +124,7 @@ public class SysRoleController extends AbstractController {
 	@RequiresPermissions("sys:role:delete")
 	public R delete(@RequestBody Long[] roleIds){
 		sysRoleService.deleteBatch(roleIds);
-		
+
 		return R.ok();
 	}
 }

@@ -26,14 +26,14 @@ import java.util.Map;
 /**
  * 系统日志
  *
- * @author Mark sunlightcs@gmail.com
+ * @author 王子铭
  */
 @Controller
 @RequestMapping("/sys/log")
 public class SysLogController {
 	@Autowired
 	private SysLogService sysLogService;
-	
+
 	/**
 	 * 列表
 	 */
@@ -51,5 +51,5 @@ public class SysLogController {
 		int sum = (int) Math.floor(r/limit)+1;
 		return R.ok().put("page", list).put("totalCount",r).put("currPage",page).put("totalPage",sum);
 	}
-	
+
 }

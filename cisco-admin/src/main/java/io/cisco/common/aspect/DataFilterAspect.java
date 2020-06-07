@@ -30,8 +30,6 @@ import java.util.*;
 
 /**
  * 数据过滤，切面处理类
- *
- * @author Mark sunlightcs@gmail.com
  */
 @Aspect
 @Component
@@ -78,17 +76,19 @@ public class DataFilterAspect {
             tableAlias +=  ".";
         }
 
-        //部门ID列表
+        //项目ID列表
         Set<Long> deptIdList = new HashSet<>();
 
-        //用户角色对应的部门ID列表
+        //用户角色对应的项目ID列表
         List<Long> roleIdList = sysUserRoleService.queryRoleIdList(user.getUserId());
+        List<Long> userDeptIdList2 = sysDeptService.queryDetpIdList2(user.getUserId());
         if(roleIdList.size() > 0){
             List<Long> userDeptIdList = sysRoleDeptService.queryDeptIdList(roleIdList.toArray(new Long[roleIdList.size()]));
             deptIdList.addAll(userDeptIdList);
+            deptIdList.addAll(userDeptIdList2);
         }
 
-        //用户子部门ID列表
+        //用户子项目ID列表
         if(dataFilter.subDept()){
             List<Long> subDeptIdList = sysDeptService.getSubDeptIdList(user.getDeptId());
             deptIdList.addAll(subDeptIdList);

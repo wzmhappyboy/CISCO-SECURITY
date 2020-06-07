@@ -25,7 +25,7 @@ public class SysDeptServiceImpl  implements SysDeptService {
 	@Autowired
 	SysDeptDao sysDeptDao;
 
-	
+
 	@Override
 	@DataFilter(subDept = true, user = false, tableAlias = "t1")
 	public List<SysDeptEntity> queryList(Map<String, Object> params){
@@ -36,6 +36,12 @@ public class SysDeptServiceImpl  implements SysDeptService {
 	public List<Long> queryDetpIdList(Long parentId) {
 		return sysDeptDao.queryDetpIdList(parentId);
 	}
+
+	@Override
+	public List<Long> queryDetpIdList2(Long parentId) {
+		return sysDeptDao.queryDetpIdList2(parentId);
+	}
+
 
 	@Override
 	public List<Long> getSubDeptIdList(Long deptId){
